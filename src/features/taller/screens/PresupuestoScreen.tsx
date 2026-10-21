@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { createQuote, fetchStock } from "../taller.client";
 import { errorMessage, formatMoney } from "../taller.shared";
-import { LABOR_CATEGORY_LABELS } from "../taller.types";
+import { LABOR_CATEGORY_LABELS, LABOR_PRESETS } from "../taller.types";
 import type { TallerLaborCategory, TallerLaborItem, TallerQuote, TallerStockItem } from "../taller.types";
+
+const CUSTOM_PRESET_VALUE = "__custom__";
 
 type PartLine = { stockId: number; name: string; quantity: number; unitPrice: number; availableAfter: number };
 
@@ -11,8 +13,9 @@ export function PresupuestoScreen() {
   const [clientName, setClientName] = useState("");
 
   const [laborCategory, setLaborCategory] = useState<TallerLaborCategory>("chapa");
-  const [laborDescription, setLaborDescription] = useState("");
-  const [laborPrice, setLaborPrice] = useState("");
+  const [laborPresetIndex, setLaborPresetIndex] = useState(0);
+  const [laborDescription, setLaborDescription] = useState(LABOR_PRESETS.chapa[0].description);
+  const [laborPrice, setLaborPrice] = useState(String(LABOR_PRESETS.chapa[0].price));
   const [laborItems, setLaborItems] = useState<TallerLaborItem[]>([]);
 
   const [stock, setStock] = useState<TallerStockItem[]>([]);
@@ -44,12 +47,35 @@ export function PresupuestoScreen() {
     return map;
   }, [parts]);
 
+  function handleCategoryChange(category: TallerLaborCategory) {
+    setLaborCategory(category);
+    setLaborPresetIndex(0);
+    setLaborDescription(LABOR_PRESETS[category][0].description);
+    setLaborPrice(String(LABOR_PRESETS[category][0].price));
+  }
+
+  function handlePresetChange(value: string) {
+    if (value === CUSTOM_PRESET_VALUE) {
+      setLaborPresetIndex(-1);
+      setLaborDescription("");
+      setLaborPrice("");
+      return;
+    }
+    const index = Number(value);
+    const preset = LABOR_PRESETS[laborCategory][index];
+    if (!preset) return;
+    setLaborPresetIndex(index);
+    setLaborDescription(preset.description);
+    setLaborPrice(String(preset.price));
+  }
+
   function handleAddLabor() {
     const price = Number(laborPrice);
     if (!laborDescription.trim() || !Number.isFinite(price) || price <= 0) return;
     setLaborItems((current) => [...current, { category: laborCategory, description: laborDescription.trim(), price }]);
-    setLaborDescription("");
-    setLaborPrice("");
+    setLaborPresetIndex(0);
+    setLaborDescription(LABOR_PRESETS[laborCategory][0].description);
+    setLaborPrice(String(LABOR_PRESETS[laborCategory][0].price));
   }
 
   function handleRemoveLabor(index: number) {
@@ -181,18 +207,32 @@ export function PresupuestoScreen() {
 
       <h2 className="section-title">Mano de obra</h2>
       <div className="add-row">
-        <select value={laborCategory} onChange={(event) => setLaborCategory(event.target.value as TallerLaborCategory)}>
+        <select value={laborCategory} onChange={(event) => handleCategoryChange(event.target.value as TallerLaborCategory)}>
           <option value="chapa">Chapa</option>
           <option value="pintura">Pintura</option>
           <option value="otro">Otro</option>
         </select>
-        <input
+        <select
           className="add-row__description"
-          placeholder="Descripción (ej. puerta izquierda)"
-          value={laborDescription}
-          onChange={(event) => setLaborDescription(event.target.value)}
-          maxLength={160}
-        />
+          value={laborPresetIndex === -1 ? CUSTOM_PRESET_VALUE : String(laborPresetIndex)}
+          onChange={(event) => handlePresetChange(event.target.value)}
+        >
+          {LABOR_PRESETS[laborCategory].map((preset, index) => (
+            <option key={preset.description} value={index}>
+              {preset.description} — {formatMoney(preset.price)}
+            </option>
+          ))}
+          <option value={CUSTOM_PRESET_VALUE}>Personalizado…</option>
+        </select>
+        {laborPresetIndex === -1 && (
+          <input
+            className="add-row__description"
+            placeholder="Descripción (ej. puerta izquierda)"
+            value={laborDescription}
+            onChange={(event) => setLaborDescription(event.target.value)}
+            maxLength={160}
+          />
+        )}
         <input
           className="add-row__price"
           placeholder="$"
