@@ -210,6 +210,9 @@ export function PresupuestoScreen() {
         <select value={laborCategory} onChange={(event) => handleCategoryChange(event.target.value as TallerLaborCategory)}>
           <option value="chapa">Chapa</option>
           <option value="pintura">Pintura</option>
+          <option value="mecanica">Mecánica</option>
+          <option value="electricidad">Electricidad</option>
+          <option value="tapiceria">Tapicería</option>
           <option value="otro">Otro</option>
         </select>
         <select

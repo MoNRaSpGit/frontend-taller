@@ -1,4 +1,4 @@
-export type TallerLaborCategory = "chapa" | "pintura" | "otro";
+export type TallerLaborCategory = "chapa" | "pintura" | "mecanica" | "electricidad" | "tapiceria" | "otro";
 
 export type TallerLaborItem = {
   category: TallerLaborCategory;
@@ -34,6 +34,9 @@ export type TallerQuote = {
 export const LABOR_CATEGORY_LABELS: Record<TallerLaborCategory, string> = {
   chapa: "Chapa",
   pintura: "Pintura",
+  mecanica: "Mecánica",
+  electricidad: "Electricidad",
+  tapiceria: "Tapicería",
   otro: "Otro"
 };
 
@@ -60,6 +63,25 @@ export const LABOR_PRESETS: Record<TallerLaborCategory, TallerLaborPreset[]> = {
     { description: "Pintura de paragolpe", price: 1500 },
     { description: "Pintura de techo", price: 3000 },
     { description: "Pintura general (auto completo)", price: 18000 }
+  ],
+  mecanica: [
+    { description: "Cambio de amortiguadores", price: 3800 },
+    { description: "Cambio de pastillas de freno", price: 2200 },
+    { description: "Cambio de correa de distribución", price: 4500 },
+    { description: "Alineación y balanceo", price: 1500 },
+    { description: "Service / cambio de aceite", price: 1800 }
+  ],
+  electricidad: [
+    { description: "Cambio de batería", price: 2800 },
+    { description: "Reparación de instalación eléctrica", price: 2000 },
+    { description: "Cambio de alternador", price: 3500 },
+    { description: "Diagnóstico con escáner", price: 900 }
+  ],
+  tapiceria: [
+    { description: "Tapizado de asiento", price: 2600 },
+    { description: "Reparación de techo (vinilo)", price: 1800 },
+    { description: "Cambio de alfombra", price: 1400 },
+    { description: "Tapizado completo de interior", price: 9500 }
   ],
   otro: [
     { description: "Pulido y lustrado", price: 1200 },
