@@ -183,15 +183,24 @@ button {
   flex: 0 0 auto;
 }
 
-/* En celular cada campo ocupa toda la fila, sin forzar el ancho de la pantalla */
+/* En celular, en fila quedaban amontonados y disparejos -- en columna,
+   cada campo prolijo uno abajo del otro y el boton "Agregar" al final
+   ocupando todo el ancho (pedido explicito, 21/10/2026). */
 @media (max-width: 480px) {
-  .add-row select,
-  .add-row input {
-    flex: 1 1 100%;
+  .add-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
+  .add-row select,
+  .add-row input,
   .add-row__price {
+    width: 100%;
     max-width: none;
+  }
+
+  .add-row > .button {
+    width: 100%;
   }
 }
 
