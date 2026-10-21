@@ -1,0 +1,12 @@
+{
+  "name": "Taller",
+  "short_name": "Taller",
+  "description": "Presupuestos de chapa y pintura, con stock.",
+  "lang": "es-UY",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1e293b",
+  "theme_color": "#1e293b",
+  "icons": [{ "src": "logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
