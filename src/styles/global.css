@@ -262,118 +262,144 @@ button {
   color: var(--color-accent-dark);
 }
 
-/* ---------------- Recibo / resultado del presupuesto (boleta) ---------------- */
-.quote-receipt {
-  background: var(--color-surface);
+/* ---------------- Recibo / resultado del presupuesto (boleta, mismo
+   patron formal que frontend-distribuidora, pedido explicito 21/10/2026) ---------------- */
+.boleta {
+  background: #fff;
+  color: #111;
   border: 1px solid var(--color-border);
-  border-top: 4px solid var(--color-accent-dark);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow-card);
+  border-radius: 6px;
+  padding: 20px;
+  font-size: 14px;
   margin-bottom: 16px;
 }
 
-.quote-receipt__brand {
+.boleta-header {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.quote-receipt__logo {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-.quote-receipt__brand-name {
-  display: block;
-  font-size: 1.1rem;
-  color: var(--color-accent-dark);
-}
-
-.quote-receipt__brand-tagline {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--color-muted);
-}
-
-.quote-receipt__meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 14px;
-  font-size: 0.86rem;
-  color: var(--color-muted);
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #111;
 }
 
-.quote-receipt__meta strong {
-  color: var(--color-text);
-  font-variant-numeric: tabular-nums;
-}
-
-.quote-receipt__info {
+.boleta-empresa {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 12px 14px;
-  background: var(--color-bg);
+  gap: 12px;
+  min-width: 0;
+}
+
+.boleta-empresa img {
+  width: 48px;
+  height: 48px;
   border-radius: 10px;
 }
 
-.quote-receipt__info-label {
+.boleta-empresa strong {
+  font-size: 18px;
+}
+
+.boleta-empresa span,
+.boleta-empresa strong,
+.boleta-numero span,
+.boleta-numero strong {
   display: block;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-muted);
 }
 
-.quote-receipt__footer {
-  margin: 14px 0 0;
+.boleta-numero {
+  min-width: 170px;
+  padding: 10px 14px;
+  border: 2px solid #111;
+  border-radius: 6px;
   text-align: center;
-  font-size: 0.74rem;
-  color: var(--color-muted);
 }
 
-.quote-receipt__section {
-  margin: 18px 0 8px;
-  font-size: 0.9rem;
-  color: var(--color-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+.boleta-numero strong {
+  font-size: 16px;
+  letter-spacing: 0.08em;
 }
 
-.quote-receipt__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.boleta-cliente {
   display: grid;
-  gap: 6px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px 16px;
+  padding: 14px 0;
 }
 
-.quote-receipt__list li {
+.boleta-cliente div > * {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.boleta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #555;
+}
+
+.boleta-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.boleta-tabla th,
+.boleta-tabla td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.boleta-tabla th {
+  border-bottom: 2px solid #111;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.boleta-tabla .num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.boleta-pie {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.boleta-nota {
+  flex: 1 1 200px;
+  margin: 0;
+  color: #555;
+  font-size: 12px;
+}
+
+.boleta-totales {
+  flex: 0 1 260px;
+  margin: 0 0 0 auto;
+}
+
+.boleta-totales div {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  font-size: 0.92rem;
+  gap: 16px;
+  padding: 4px 0;
 }
 
-.quote-receipt__total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 2px dashed var(--color-border);
-  font-size: 1.2rem;
+.boleta-totales dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
 }
 
-.quote-receipt__total strong {
-  color: var(--color-accent);
+.boleta-total {
+  margin-top: 4px;
+  border-top: 2px solid #111;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /* ---------------- Tabla de stock ---------------- */

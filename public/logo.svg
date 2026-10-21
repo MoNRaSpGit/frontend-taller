@@ -1,18 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="28" fill="#1e293b" />
-  <!-- Silueta de auto con un chorro de pintura, el concepto del proyecto: chapa y pintura. -->
-  <path
-    d="M22 84 C22 72 28 66 38 64 L46 50 C49 45 54 42 60 42 L78 42 C85 42 91 46 94 53 L98 64 C106 66 110 72 110 82 V86 C110 90 107 93 103 93 H97 C96 97 92 100 88 100 C84 100 80 97 79 93 H51 C50 97 46 100 42 100 C38 100 34 97 33 93 H27 C24 93 22 90 22 86 Z"
-    fill="#e2e8f0"
-  />
-  <circle cx="42" cy="93" r="7" fill="#1e293b" />
-  <circle cx="88" cy="93" r="7" fill="#1e293b" />
-  <path d="M44 64 L50 50 C51.5 47 54.5 45 58 45 L58 64 Z" fill="#1e293b" opacity="0.18" />
-  <path d="M62 64 L62 45 L78 45 C82 45 85.5 47.5 87.5 51 L92 64 Z" fill="#1e293b" opacity="0.18" />
-  <!-- Chorro de pintura naranja cayendo sobre el capot -->
-  <path
-    d="M80 18 C80 18 86 28 86 34 C86 38.4 83.1 42 79.5 42 C75.9 42 73 38.4 73 34 C73 28 80 18 80 18 Z"
-    fill="#ea580c"
-  />
-  <circle cx="92" cy="26" r="4" fill="#ea580c" />
+  <rect width="128" height="128" rx="20" fill="#1e293b" />
+  <!-- Llave inglesa simple (marca generica del taller, reemplazable despues). -->
+  <g transform="rotate(45 64 64)">
+    <rect x="28" y="58" width="72" height="12" rx="6" fill="#ea580c" />
+    <circle cx="24" cy="64" r="16" fill="#ea580c" />
+    <circle cx="104" cy="64" r="16" fill="#ea580c" />
+    <circle cx="24" cy="64" r="8" fill="#1e293b" />
+    <circle cx="104" cy="64" r="8" fill="#1e293b" />
+  </g>
 </svg>
