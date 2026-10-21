@@ -112,6 +112,7 @@ button {
   display: block;
   margin-bottom: 12px;
   flex: 1;
+  min-width: 0;
 }
 
 .field span {
@@ -148,23 +149,50 @@ button {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .add-row select,
 .add-row input {
   min-height: 42px;
+  min-width: 0;
+  max-width: 100%;
   padding: 6px 10px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background: #fff;
 }
 
+.add-row select {
+  text-overflow: ellipsis;
+}
+
 .add-row__description {
   flex: 1 1 200px;
+  min-width: 0;
 }
 
 .add-row__price {
-  width: 90px;
+  flex: 1 1 80px;
+  width: auto;
+  min-width: 0;
+  max-width: 110px;
+}
+
+.add-row > .button {
+  flex: 0 0 auto;
+}
+
+/* En celular cada campo ocupa toda la fila, sin forzar el ancho de la pantalla */
+@media (max-width: 480px) {
+  .add-row select,
+  .add-row input {
+    flex: 1 1 100%;
+  }
+
+  .add-row__price {
+    max-width: none;
+  }
 }
 
 /* ---------------- Lineas de presupuesto en edicion ---------------- */
@@ -188,6 +216,7 @@ button {
 
 .quote-line-list li span {
   flex: 1;
+  min-width: 0;
 }
 
 .quote-receipt__badge {
