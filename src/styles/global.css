@@ -262,40 +262,81 @@ button {
   color: var(--color-accent-dark);
 }
 
-/* ---------------- Recibo / resultado del presupuesto ---------------- */
+/* ---------------- Recibo / resultado del presupuesto (boleta) ---------------- */
 .quote-receipt {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-accent-dark);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 24px;
   box-shadow: var(--shadow-card);
   margin-bottom: 16px;
 }
 
-.quote-receipt__header {
+.quote-receipt__brand {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.quote-receipt__header h1 {
-  margin: 0;
+.quote-receipt__logo {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
 }
 
-.quote-receipt__id {
+.quote-receipt__brand-name {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--color-accent-dark);
+}
+
+.quote-receipt__brand-tagline {
+  display: block;
+  font-size: 0.78rem;
   color: var(--color-muted);
+}
+
+.quote-receipt__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  font-size: 0.86rem;
+  color: var(--color-muted);
+}
+
+.quote-receipt__meta strong {
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
 
-.quote-receipt__vehicle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 4px 0 0;
+.quote-receipt__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--color-bg);
+  border-radius: 10px;
 }
 
-.quote-receipt__client {
+.quote-receipt__info-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--color-muted);
-  margin: 2px 0 0;
+}
+
+.quote-receipt__footer {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.74rem;
+  color: var(--color-muted);
 }
 
 .quote-receipt__section {
