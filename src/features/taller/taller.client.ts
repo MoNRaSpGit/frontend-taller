@@ -49,3 +49,7 @@ export function createQuote(input: {
 }) {
   return request<TallerQuote>("/quotes", { method: "POST", body: JSON.stringify(input) });
 }
+
+export function recordEntrada() {
+  return request<{ ok: true }>("/entrada", { method: "POST" });
+}

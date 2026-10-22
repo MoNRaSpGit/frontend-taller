@@ -42,6 +42,34 @@ button {
   flex-direction: column;
 }
 
+/* ---------------- Pantalla "Entrar" (sin usuario ni contraseña) ---------------- */
+.entrar-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--color-accent-dark);
+}
+
+.entrar-card {
+  width: min(320px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 36px 28px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.entrar-card strong {
+  font-size: 1.1rem;
+  color: var(--color-accent-dark);
+}
+
 /* ---------------- Barra superior ---------------- */
 .app-bar {
   position: sticky;
