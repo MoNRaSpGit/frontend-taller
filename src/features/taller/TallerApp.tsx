@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { EntrarScreen } from "./components/EntrarScreen";
-import { PresupuestoScreen } from "./screens/PresupuestoScreen";
-import { StockScreen } from "./screens/StockScreen";
+import { ClientesScreen } from "./screens/ClientesScreen";
+import { CorreosScreen } from "./screens/CorreosScreen";
+import { MaterialesScreen } from "./screens/MaterialesScreen";
+import { PanelScreen } from "./screens/PanelScreen";
+import { SINIESTROS } from "./taller.mock";
+import type { Siniestro } from "./taller.types";
 
-type Tab = "presupuesto" | "stock";
+type Tab = "panel" | "clientes" | "materiales" | "correos";
+
+const TABS: { key: Tab; label: string; icon: string }[] = [
+  { key: "clientes", label: "Clientes", icon: "☺" },
+  { key: "panel", label: "Panel", icon: "▦" },
+  { key: "materiales", label: "Materiales", icon: "▤" },
+  { key: "correos", label: "Correos", icon: "✉" }
+];
 
 const ENTERED_STORAGE_KEY = "taller-entered";
 
 function loadEntered() {
-  if (typeof window === "undefined") return false;
   try {
     return window.sessionStorage.getItem(ENTERED_STORAGE_KEY) === "1";
   } catch {
@@ -17,7 +27,11 @@ function loadEntered() {
 }
 
 export function TallerApp() {
-  const [tab, setTab] = useState<Tab>("presupuesto");
+  const [tab, setTab] = useState<Tab>("clientes");
+  const [clienteId, setClienteId] = useState<string | null>(() =>
+    typeof window !== "undefined" && window.innerWidth > 760 ? SINIESTROS[0].clienteId : null
+  );
+  const [siniestroId, setSiniestroId] = useState<string | null>(null);
   const [entered, setEntered] = useState(loadEntered);
 
   if (!entered) {
@@ -35,21 +49,50 @@ export function TallerApp() {
     );
   }
 
-  return (
-    <div className="app">
-      <header className="app-bar">
-        <strong>Taller — Chapa y Pintura</strong>
-        <nav className="app-tabs">
-          <button type="button" className={tab === "presupuesto" ? "is-active" : ""} onClick={() => setTab("presupuesto")}>
-            Presupuesto
-          </button>
-          <button type="button" className={tab === "stock" ? "is-active" : ""} onClick={() => setTab("stock")}>
-            Stock
-          </button>
-        </nav>
-      </header>
+  function openSiniestro(siniestro: Siniestro) {
+    setClienteId(siniestro.clienteId);
+    setSiniestroId(siniestro.id);
+    setTab("clientes");
+  }
 
-      <main className="app-main">{tab === "presupuesto" ? <PresupuestoScreen /> : <StockScreen />}</main>
+  function openSiniestroById(id: string) {
+    const siniestro = SINIESTROS.find((item) => item.id === id);
+    if (siniestro) openSiniestro(siniestro);
+  }
+
+  return (
+    <div className="shell">
+      <aside className="sidebar">
+        <div className="brand">
+          <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" />
+          <span>Taller</span>
+        </div>
+        <nav>
+          {TABS.map((item) => (
+            <button type="button" key={item.key} className={tab === item.key ? "is-active" : ""} onClick={() => setTab(item.key)}>
+              <span className="nav-icon">{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+        <p className="sidebar-note">Vista de ejemplo con datos ficticios</p>
+      </aside>
+
+      <main className="content">
+        {tab === "panel" && <PanelScreen onOpen={openSiniestro} />}
+        {tab === "clientes" && (
+          <ClientesScreen
+            selectedId={clienteId}
+            selectedSiniestroId={siniestroId}
+            onSelect={(id, sid) => {
+              setClienteId(id);
+              setSiniestroId(sid ?? null);
+            }}
+          />
+        )}
+        {tab === "materiales" && <MaterialesScreen onOpenSiniestro={openSiniestroById} />}
+        {tab === "correos" && <CorreosScreen onOpenSiniestro={openSiniestroById} />}
+      </main>
     </div>
   );
 }
